@@ -9,9 +9,9 @@ const suspiciousPatterns = [
   /open\(["'][^'"]*\.py["']\)/i,
   /import\s+(os|sys)/i,
   /subprocess\.Popen/i,
-  /base64\.b64decode/i,  // Base64 decoding (suspicious)
-  /requests\.get\(/i,     // Suspicious network requests
-  /open\(['"][^'"]*\.(exe|sh|bat)['"]\)/i // Suspicious file operations
+  /base64\.b64decode/i,
+  /requests\.get\(/i,
+  /open\(['"][^'"]*\.(exe|sh|bat)['"]\)/i
 ];
 
 const textarea = document.getElementById("codeInput");
@@ -42,6 +42,10 @@ function checkCode() {
   const resultsBox = document.getElementById("results");
   let results = [];
 
+  // Apply syntax highlighting using Prism.js
+  const language = languageSelect.value;
+  textarea.innerHTML = Prism.highlight(code, Prism.languages[language], language);
+  
   suspiciousPatterns.forEach((pattern) => {
     if (pattern.test(code)) {
       results.push(`⚠️ Suspicious code matched: ${pattern}`);
@@ -69,22 +73,23 @@ function toggleSettings() {
 function applySettings() {
   const darkModeToggle = document.getElementById("darkModeToggle").checked;
   const fontSize = document.getElementById("fontSizeInput").value;
+  const lineSpacing = document.getElementById("lineSpacingInput").value;
 
   // Apply dark mode
   if (darkModeToggle) {
     document.body.classList.add("dark-mode");
-    document.body.style.color = 'white'; // Change text color to white
   } else {
     document.body.classList.remove("dark-mode");
-    document.body.style.color = 'black'; // Change text color to black
   }
 
-  // Apply font size
+  // Apply font size and line spacing
   textarea.style.fontSize = `${fontSize}px`;
+  textarea.style.lineHeight = lineSpacing;
 }
 
 function resetSettings() {
   document.getElementById("darkModeToggle").checked = false;
   document.getElementById("fontSizeInput").value = 15;
+  document.getElementById("lineSpacingInput").value = 1.5;
   applySettings();
 }
