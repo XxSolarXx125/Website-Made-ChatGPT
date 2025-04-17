@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Checker</title>
+  <title>Code Suspicion Checker</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css">
 </head>
@@ -15,15 +15,15 @@
       <option value="python">Python</option>
     </select>
 
-    <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
-    
+    <div class="textarea-container">
+      <div id="lineNumbers" class="line-numbers"></div>
+      <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+    </div>
+
     <div class="buttons">
       <input type="file" id="fileUpload" accept=".py">
       <button onclick="checkCode()">Check Code</button>
     </div>
-
-    <h3>Highlighted Preview:</h3>
-    <pre><code id="highlightedCode" class="language-python"></code></pre>
 
     <div id="results"></div>
   </div>
