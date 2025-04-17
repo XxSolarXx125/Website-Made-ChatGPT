@@ -48,7 +48,7 @@ h1 {
   word-wrap: break-word;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10;
   overflow: hidden;
   max-height: 100%;
 }
@@ -61,9 +61,9 @@ textarea {
   font-family: monospace;
   font-size: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   resize: none; /* Disable resizing */
-  margin-left: 70px; /* Adjust the margin to align with the line numbers */
+  margin-left: 60px; /* Adjust the margin to align with the line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
   overflow-y: hidden; /* Hide vertical scrollbar, adjust height dynamically */
