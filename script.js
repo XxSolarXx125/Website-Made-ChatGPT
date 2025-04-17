@@ -42,12 +42,24 @@ languageSelect.addEventListener("change", function () {
 });
 
 function updateLineNumbers() {
-  const lines = textarea.value.split("\n").length;
+  const lines = textarea.value.split("\n");
   let lineNumbersText = "";
-  for (let i = 1; i <= lines; i++) {
-    lineNumbersText += `${i}.\n`;
-  }
+  let totalHeight = 0;
+
+  // Calculate total height of textarea content to adjust dynamically
+  lines.forEach((line, index) => {
+    lineNumbersText += `${index + 1}.\n`;  // Format the line numbers
+    totalHeight += getLineHeight(line);     // Sum of the height of each line (based on line length)
+  });
+
   lineNumbers.textContent = lineNumbersText;
+  textarea.style.height = `${Math.max(totalHeight, 250)}px`;  // Adjust textarea height dynamically (min height 250px)
+}
+
+function getLineHeight(line) {
+  const baseHeight = 20;  // Base height for each line (adjust as necessary)
+  const extraHeight = line.length > 80 ? (line.length - 80) / 5 : 0;  // Adjust height for long lines
+  return baseHeight + extraHeight;
 }
 
 function checkCode() {
