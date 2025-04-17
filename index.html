@@ -1,66 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Suspicion Checker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Suspicion Checker</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Highlight.js theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Code Suspicion Checker</h1>
-        <p>Paste your code or upload a file. Select the language for syntax highlighting:</p>
+  <div class="container">
+    <h1>Code Suspicion Checker</h1>
+    <p>Paste your code or upload a file. Select the language for syntax highlighting:</p>
 
-        <select id="languageSelect">
-            <option value="python">Python</option>
-            <option value="javascript">JavaScript</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="java">Java</option>
-            <option value="php">PHP</option>
-            <option value="ruby">Ruby</option>
-        </select>
+    <select id="languageSelect">
+      <option value="plaintext">Auto Detect</option>
+      <option value="python">Python</option>
+      <option value="javascript">JavaScript</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="java">Java</option>
+      <option value="php">PHP</option>
+      <option value="ruby">Ruby</option>
+    </select>
 
-        <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+    <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
 
-        <div class="buttons">
-            <input type="file" id="fileUpload" accept=".py, .js, .html, .css, .java, .php, .rb">
-            <button onclick="checkCode()">Check Code</button>
-            <button id="settingsBtn" onclick="toggleSettings()">Settings</button>
-        </div>
-
-        <div id="results"></div>
-
-        <!-- Settings Panel -->
-        <div id="settingsPanel" class="settings-panel">
-            <h3>Settings</h3>
-            <label>
-                <input type="checkbox" id="darkModeToggle"> Dark Mode
-            </label>
-            <br>
-            <label>
-                Font Size:
-                <input type="number" id="fontSizeInput" value="15" min="10" max="30"> px
-            </label>
-            <br>
-            <label>
-                Line Spacing:
-                <input type="number" id="lineSpacingInput" value="1.5" step="0.1" min="1" max="3"> em
-            </label>
-            <br>
-            <button onclick="applySettings()">Apply Settings</button>
-            <button onclick="resetSettings()">Reset</button>
-        </div>
+    <div class="buttons">
+      <input type="file" id="fileUpload" accept=".py, .js, .html, .css, .java, .php, .rb" />
+      <button onclick="checkCode()">Check Code</button>
+      <button id="settingsBtn" onclick="toggleSettings()">Settings</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-ruby.min.js"></script>
-    <script src="script.js"></script>
+    <div id="results"></div>
+
+    <!-- Syntax Highlighted Preview -->
+    <pre><code id="highlightedCode" class="hljs"></code></pre>
+
+    <!-- Settings Panel -->
+    <div id="settingsPanel" class="settings-panel">
+      <h3>Settings</h3>
+      <label>
+        <input type="checkbox" id="darkModeToggle" /> Dark Mode
+      </label>
+      <br />
+      <label>
+        Font Size:
+        <input type="number" id="fontSizeInput" value="15" min="10" max="30" /> px
+      </label>
+      <br />
+      <label>
+        Line Spacing:
+        <input type="number" id="lineSpacingInput" value="1.5" step="0.1" min="1" max="3" /> em
+      </label>
+      <br />
+      <button onclick="applySettings()">Apply Settings</button>
+      <button onclick="resetSettings()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- Load specific languages if needed -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+  <!-- Your custom script -->
+  <script src="script.js"></script>
 </body>
 </html>
