@@ -1,3 +1,4 @@
+/* General styling */
 body {
   font-family: 'Segoe UI', sans-serif;
   background: #f5f5f5;
@@ -12,8 +13,8 @@ body {
 }
 
 .container {
-  width: 90%; /* Full-width container (up to 90%) */
-  max-width: 1100px; /* Allow for a larger container up to 1100px */
+  width: 90%;
+  max-width: 1100px;
   margin: 40px auto;
   padding: 30px;
   background: white;
@@ -27,49 +28,19 @@ h1 {
   transition: color 0.3s;
 }
 
-.code-container {
-  display: flex;
-  margin-top: 10px;
-  position: relative;
-}
-
-#lineNumbers {
-  background: #f4f4f4;
-  color: #888;
-  font-family: monospace;
-  font-size: 15px;
-  width: 70px; /* Fixed width to avoid clipping */
-  padding: 10px;
-  line-height: 1.5;
-  text-align: right;
-  border-right: 1px solid #ccc;
-  border-radius: 5px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  position: absolute;
-  top: 0;
-  left: 10;
-  overflow: hidden;
-  max-height: 100%;
-}
-
 textarea {
-  width: calc(100% - 70px); /* Adjust width to leave space for the line numbers */
-  height: auto;
+  width: 100%;
   min-height: 300px; /* Increased height for the text area */
   padding: 10px;
   font-family: monospace;
   font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  resize: none; /* Disable resizing */
-  margin-left: 70px; /* Adjust the margin to align with the line numbers */
+  resize: none;
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
-  overflow-y: hidden; /* Hide vertical scrollbar, adjust height dynamically */
+  overflow-y: hidden; /* Hide vertical scrollbar */
 }
-
-
 
 .buttons {
   display: flex;
@@ -126,15 +97,6 @@ button:hover {
   background-color: #e14a4a;
 }
 
-pre {
-  background: #2d2d2d;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  overflow-x: auto;
-  color: white;
-}
-
 /* Dark Mode Styles */
 body.dark-mode {
   background: #121212;
@@ -154,11 +116,6 @@ body.dark-mode textarea {
   background: #333;
   color: white;
   border: 1px solid #444;
-}
-
-body.dark-mode #lineNumbers {
-  background: #333;
-  color: #bbb;
 }
 
 body.dark-mode button {
