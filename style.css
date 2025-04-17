@@ -26,11 +26,12 @@ h1 {
   text-align: center;
   color: #6c63ff;
   transition: color 0.3s;
+  animation: fadeIn 1s ease-in-out;
 }
 
 textarea {
   width: 100%;
-  min-height: 300px; /* Increased height for the text area */
+  min-height: 300px;
   padding: 10px;
   font-family: monospace;
   font-size: 15px;
@@ -38,8 +39,15 @@ textarea {
   border-radius: 5px;
   resize: none;
   line-height: 1.5;
+  overflow-y: auto; /* Enable scrolling inside the textarea */
   transition: background-color 0.3s, color 0.3s;
-  overflow-y: hidden; /* Hide vertical scrollbar */
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+  animation: highlightFocus 0.3s ease-in-out;
 }
 
 .buttons {
@@ -84,7 +92,7 @@ button:hover {
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   z-index: 10;
   width: 300px;
-  transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+  animation: fadeInSettings 0.5s ease-in-out;
 }
 
 .settings-panel button {
@@ -126,7 +134,27 @@ body.dark-mode button:hover {
   background-color: #7a4fdd;
 }
 
-/* Add smoother transitions when switching modes */
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes highlightFocus {
+  0% {
+    border-color: #6c63ff;
+  }
+  100% {
+    border-color: #ff6b6b;
+  }
+}
+
 @keyframes fadeInSettings {
   0% {
     opacity: 0;
