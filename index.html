@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <title>Code Checker</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css">
 </head>
 <body>
   <div class="container">
     <h1>Code Suspicion Checker</h1>
-    <p>Paste your Python code below or upload a file to check for suspicious content.</p>
+    <p>Paste your code or upload a file. Select the language for syntax highlighting:</p>
+
+    <select id="languageSelect">
+      <option value="python">Python</option>
+    </select>
 
     <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
     
@@ -17,9 +22,14 @@
       <button onclick="checkCode()">Check Code</button>
     </div>
 
+    <h3>Highlighted Preview:</h3>
+    <pre><code id="highlightedCode" class="language-python"></code></pre>
+
     <div id="results"></div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
