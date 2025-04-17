@@ -45,15 +45,23 @@ function updateLineNumbers() {
   const lines = textarea.value.split("\n");
   let lineNumbersText = "";
   let totalHeight = 0;
-
-  // Calculate total height of textarea content to adjust dynamically
+  const lineHeight = 20; // Base line height for text
+  
   lines.forEach((line, index) => {
     lineNumbersText += `${index + 1}.\n`;  // Format the line numbers
-    totalHeight += getLineHeight(line);     // Sum of the height of each line (based on line length)
+    totalHeight += lineHeight; // Total height of the line numbers
   });
 
+  // Set the line numbers content
   lineNumbers.textContent = lineNumbersText;
-  textarea.style.height = `${Math.max(totalHeight, 250)}px`;  // Adjust textarea height dynamically (min height 250px)
+
+  // Update the textarea height dynamically
+  const minHeight = 300;
+  const calculatedHeight = Math.max(totalHeight, minHeight);
+  textarea.style.height = `${calculatedHeight}px`;
+
+  // Also adjust the height of the line numbers to match the textarea height
+  lineNumbers.style.height = `${calculatedHeight}px`;
 }
 
 function getLineHeight(line) {
