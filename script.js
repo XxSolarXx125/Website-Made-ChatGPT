@@ -15,7 +15,6 @@ const suspiciousPatterns = [
 ];
 
 const textarea = document.getElementById("codeInput");
-const lineNumbers = document.getElementById("lineNumbers");
 const languageSelect = document.getElementById("languageSelect");
 
 document.getElementById("fileUpload").addEventListener("change", function () {
@@ -24,7 +23,6 @@ document.getElementById("fileUpload").addEventListener("change", function () {
     const reader = new FileReader();
     reader.onload = function (e) {
       textarea.value = e.target.result;
-      updateLineNumbers();
       checkCode();
     };
     reader.readAsText(file);
@@ -32,43 +30,12 @@ document.getElementById("fileUpload").addEventListener("change", function () {
 });
 
 textarea.addEventListener("input", function () {
-  updateLineNumbers();
   checkCode();
 });
 
 languageSelect.addEventListener("change", function () {
-  updateLineNumbers();
   checkCode();
 });
-
-function updateLineNumbers() {
-  const lines = textarea.value.split("\n");
-  let lineNumbersText = "";
-  let totalHeight = 0;
-  const lineHeight = 20; // Base line height for text
-  
-  lines.forEach((line, index) => {
-    lineNumbersText += `${index + 1}.\n`;  // Format the line numbers
-    totalHeight += lineHeight; // Total height of the line numbers
-  });
-
-  // Set the line numbers content
-  lineNumbers.textContent = lineNumbersText;
-
-  // Update the textarea height dynamically
-  const minHeight = 300;
-  const calculatedHeight = Math.max(totalHeight, minHeight);
-  textarea.style.height = `${calculatedHeight}px`;
-
-  // Also adjust the height of the line numbers to match the textarea height
-  lineNumbers.style.height = `${calculatedHeight}px`;
-}
-
-function getLineHeight(line) {
-  const baseHeight = 20;  // Base height for each line (adjust as necessary)
-  const extraHeight = line.length > 80 ? (line.length - 80) / 5 : 0;  // Adjust height for long lines
-  return baseHeight + extraHeight;
-}
 
 function checkCode() {
   const code = textarea.value;
