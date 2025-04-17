@@ -61,13 +61,14 @@ textarea {
   font-family: monospace;
   font-size: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   resize: none; /* Disable resizing */
-  margin-left: 60px; /* Adjust the margin to align with the line numbers */
+  margin-left: 70px; /* Adjust the margin to align with the line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
   overflow-y: hidden; /* Hide vertical scrollbar, adjust height dynamically */
 }
+
 
 
 .buttons {
