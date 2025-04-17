@@ -98,8 +98,10 @@ function applySettings() {
   // Apply dark mode
   if (darkModeToggle) {
     document.body.classList.add("dark-mode");
+    document.body.style.color = 'white'; // Change text color to white
   } else {
     document.body.classList.remove("dark-mode");
+    document.body.style.color = 'black'; // Change text color to black
   }
 
   // Apply font size
