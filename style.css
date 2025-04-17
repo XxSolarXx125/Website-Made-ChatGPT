@@ -38,7 +38,7 @@ h1 {
   color: #888;
   font-family: monospace;
   font-size: 15px;
-  width: 60px; /* Increase the width for the line numbers */
+  width: 70px; /* Fixed width to avoid clipping */
   padding: 10px;
   line-height: 1.5;
   text-align: right;
@@ -46,15 +46,15 @@ h1 {
   border-radius: 5px;
   white-space: pre-wrap;
   word-wrap: break-word;
-  height: auto;
   position: absolute;
   top: 0;
-  left: 0; /* Make sure it's positioned to the left */
+  left: 0;
   overflow: hidden;
+  max-height: 100%;
 }
 
 textarea {
-  width: calc(100% - 70px); /* Adjust width to leave space for the line numbers */
+  width: calc(100% - 80px); /* Adjust width to leave space for the line numbers */
   height: auto;
   min-height: 300px; /* Increased height for the text area */
   padding: 10px;
@@ -62,8 +62,8 @@ textarea {
   font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  resize: none; /* Disable resizing */
-  margin-left: 70px; /* Adjust the margin to align with the line numbers */
+  resize: none;
+  margin-left: 80px; /* Ensure proper alignment with line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
 }
