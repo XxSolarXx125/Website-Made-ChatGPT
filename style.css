@@ -54,7 +54,7 @@ h1 {
 }
 
 textarea {
-  width: calc(100% - 80px); /* Adjust width to leave space for the line numbers */
+  width: calc(100% - 70px); /* Adjust width to leave space for the line numbers */
   height: auto;
   min-height: 300px; /* Increased height for the text area */
   padding: 10px;
@@ -62,11 +62,13 @@ textarea {
   font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  resize: none;
-  margin-left: 80px; /* Ensure proper alignment with line numbers */
+  resize: none; /* Disable resizing */
+  margin-left: 70px; /* Adjust the margin to align with the line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
+  overflow-y: hidden; /* Hide vertical scrollbar, adjust height dynamically */
 }
+
 
 .buttons {
   display: flex;
