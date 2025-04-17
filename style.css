@@ -3,7 +3,6 @@ body {
   background: #f5f5f5;
   margin: 0;
   padding: 0;
-  animation: fadeIn 1s ease-in;
   transition: color 0.3s, background-color 0.3s;
   display: flex;
   justify-content: center;
@@ -20,7 +19,6 @@ body {
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  animation: fadeIn 1s ease-in-out;
 }
 
 h1 {
@@ -40,7 +38,7 @@ h1 {
   color: #888;
   font-family: monospace;
   font-size: 15px;
-  width: 50px; /* Wider line number box */
+  width: 60px; /* Increase the width for the line numbers */
   padding: 10px;
   line-height: 1.5;
   text-align: right;
@@ -51,11 +49,12 @@ h1 {
   height: auto;
   position: absolute;
   top: 0;
-  left: 0; /* Move line numbers more to the left */
+  left: 0; /* Make sure it's positioned to the left */
+  overflow: hidden;
 }
 
 textarea {
-  width: calc(100% - 60px); /* Adjust width to leave space for the line numbers */
+  width: calc(100% - 70px); /* Adjust width to leave space for the line numbers */
   height: auto;
   min-height: 300px; /* Increased height for the text area */
   padding: 10px;
@@ -64,7 +63,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none; /* Disable resizing */
-  margin-left: 60px; /* Adjust the margin to align with the line numbers */
+  margin-left: 70px; /* Adjust the margin to align with the line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -82,12 +81,13 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   font-size: 16px;
 }
 
 button:hover {
   background-color: #554ccf;
+  transform: scale(1.05); /* Add a slight scaling effect on hover */
 }
 
 #results {
@@ -110,13 +110,17 @@ button:hover {
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   z-index: 10;
   width: 300px;
-  animation: fadeInSettings 0.5s ease-in-out;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .settings-panel button {
   margin-top: 10px;
   background-color: #ff6b6b;
+  transition: background-color 0.3s;
+}
+
+.settings-panel button:hover {
+  background-color: #e14a4a;
 }
 
 pre {
@@ -162,17 +166,7 @@ body.dark-mode button:hover {
   background-color: #7a4fdd;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
+/* Add smoother transitions when switching modes */
 @keyframes fadeInSettings {
   0% {
     opacity: 0;
