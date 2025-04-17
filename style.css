@@ -24,7 +24,6 @@ h1 {
 
 .code-container {
   display: flex;
-  align-items: flex-start;
   margin-top: 10px;
   position: relative;
 }
@@ -47,11 +46,10 @@ h1 {
   top: 0;
   left: 0;
   overflow-y: hidden;
-  margin-top: 0;
 }
 
 textarea {
-  width: calc(100% - 60px);  /* To make space for line numbers */
+  width: 100%;  /* Take full width of the container, minus line numbers */
   height: auto;
   min-height: 250px;
   padding: 10px;
@@ -60,7 +58,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none; /* Disable resizing */
-  margin-left: 10px;
+  margin-left: 60px; /* Move the text box to the right to avoid overlap */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
 }
