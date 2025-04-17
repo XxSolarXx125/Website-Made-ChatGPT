@@ -6,19 +6,14 @@ const suspiciousPatterns = [
   /import\s+subprocess/i,
   /subprocess\.run/i,
   /token/i,
-  /open\(/i,  // Suspicious use of open()
-  /import\s+requests/i,  // Potentially suspicious import
-  /input\(/i,  // Check for dangerous use of input()
-  /__import__/i,  // Dangerous dynamic import
-  /shutil\.rmtree\(/i,  // Dangerous deletion with shutil
-  /subprocess\.Popen\(/i,  // Potentially dangerous subprocess call
-  /socket\.socket\(/i,  // Suspicious use of socket
-  /base64\.b64decode\(/i  // Potentially dangerous base64 decoding
+  /open\(["'][^'"]*\.py["']\)/i,  // Checking for file access attempts
+  /import\s+(os|sys)/i,  // Dangerous imports
+  /subprocess\.Popen/i   // Another dangerous subprocess call
 ];
 
 const textarea = document.getElementById("codeInput");
-const lineNumbersDiv = document.getElementById("lineNumbers");
-const resultsBox = document.getElementById("results");
+const lineNumbers = document.getElementById("lineNumbers");
+const languageSelect = document.getElementById("languageSelect");
 
 document.getElementById("fileUpload").addEventListener("change", function () {
   const file = this.files[0];
@@ -33,22 +28,28 @@ document.getElementById("fileUpload").addEventListener("change", function () {
   }
 });
 
-textarea.addEventListener("input", function() {
+textarea.addEventListener("input", function () {
+  updateLineNumbers();
+  checkCode();
+});
+
+languageSelect.addEventListener("change", function () {
   updateLineNumbers();
   checkCode();
 });
 
 function updateLineNumbers() {
   const lines = textarea.value.split("\n").length;
-  let lineNumbers = '';
+  let lineNumbersText = "";
   for (let i = 1; i <= lines; i++) {
-    lineNumbers += i + '\n';
+    lineNumbersText += i + "\n";
   }
-  lineNumbersDiv.textContent = lineNumbers;
+  lineNumbers.textContent = lineNumbersText;
 }
 
 function checkCode() {
   const code = textarea.value;
+  const resultsBox = document.getElementById("results");
   let results = [];
 
   suspiciousPatterns.forEach((pattern) => {
