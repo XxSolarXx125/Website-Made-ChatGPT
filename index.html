@@ -2,32 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Suspicion Checker</title>
+  <title>Code Checker</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vs.min.css">
-  <style>
-    .line-numbers {
-      counter-reset: linenumber;
-    }
-    .line-numbers > code {
-      white-space: pre;
-    }
-    .line-numbers > code > span {
-      display: block;
-      counter-increment: linenumber;
-      padding-left: 3em;
-      position: relative;
-    }
-    .line-numbers > code > span::before {
-      content: counter(linenumber);
-      position: absolute;
-      left: 0;
-      color: #999;
-      width: 2.5em;
-      text-align: right;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -36,30 +13,23 @@
 
     <select id="languageSelect">
       <option value="python">Python</option>
-      <option value="javascript">JavaScript</option>
-      <option value="html">HTML</option>
-      <option value="css">CSS</option>
-      <option value="bash">Bash</option>
     </select>
 
     <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+    
     <div class="buttons">
-      <input type="file" id="fileUpload" accept=".py,.js,.html,.css,.sh,.txt">
+      <input type="file" id="fileUpload" accept=".py">
       <button onclick="checkCode()">Check Code</button>
     </div>
 
     <h3>Highlighted Preview:</h3>
-    <pre class="line-numbers"><code id="highlightedCode" class="language-python"></code></pre>
+    <pre><code id="highlightedCode" class="language-python"></code></pre>
 
     <div id="results"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-html.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
