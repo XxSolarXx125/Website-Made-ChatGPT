@@ -5,6 +5,10 @@ body {
   padding: 0;
   animation: fadeIn 1s ease-in;
   transition: color 0.3s, background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
@@ -14,6 +18,7 @@ body {
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  animation: fadeIn 1s ease-in-out;
 }
 
 h1 {
@@ -33,7 +38,7 @@ h1 {
   color: #888;
   font-family: monospace;
   font-size: 15px;
-  width: 50px;
+  width: 40px; /* Narrow the line numbers box */
   padding: 10px;
   line-height: 1.5;
   text-align: right;
@@ -44,12 +49,11 @@ h1 {
   height: auto;
   position: absolute;
   top: 0;
-  left: 0;
-  overflow-y: hidden;
+  left: 0; /* Align line numbers to the left */
 }
 
 textarea {
-  width: 100%;  /* Take full width of the container, minus line numbers */
+  width: calc(100% - 50px); /* Adjust width to leave space for the line numbers */
   height: auto;
   min-height: 250px;
   padding: 10px;
@@ -58,7 +62,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none; /* Disable resizing */
-  margin-left: 60px; /* Move the text box to the right to avoid overlap */
+  margin-left: 50px; /* Adjust the margin to align with the line numbers */
   line-height: 1.5;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -103,7 +107,7 @@ button:hover {
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   z-index: 10;
   width: 300px;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeInSettings 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
 
@@ -156,6 +160,17 @@ body.dark-mode button:hover {
 }
 
 @keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes fadeInSettings {
   0% {
     opacity: 0;
     transform: translate(-50%, -60%);
