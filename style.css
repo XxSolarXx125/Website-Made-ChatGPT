@@ -20,6 +20,7 @@ body {
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 h1 {
@@ -39,9 +40,11 @@ textarea {
   border-radius: 5px;
   resize: none;
   line-height: 1.5;
-  overflow-y: auto; /* Enable scrolling inside the textarea */
-  transition: background-color 0.3s, color 0.3s;
-  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  overflow-y: auto;
+  white-space: pre;
+  background: #1e1e1e;
+  color: #f8f8f2;
+  transition: all 0.3s ease-in-out;
 }
 
 textarea:focus {
@@ -54,6 +57,8 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 button {
@@ -69,15 +74,17 @@ button {
 
 button:hover {
   background-color: #554ccf;
-  transform: scale(1.05); /* Add a slight scaling effect on hover */
+  transform: scale(1.05);
 }
 
 #results {
   margin-top: 20px;
-  padding: 10px;
+  padding: 15px;
   display: none;
   white-space: pre-wrap;
   font-family: monospace;
+  border-left: 4px solid #6bcf63;
+  background: #eaffec;
 }
 
 .settings-panel {
@@ -121,7 +128,7 @@ body.dark-mode h1 {
 }
 
 body.dark-mode textarea {
-  background: #333;
+  background: #2d2d2d;
   color: white;
   border: 1px solid #444;
 }
@@ -136,31 +143,31 @@ body.dark-mode button:hover {
 
 /* Animations */
 @keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(-20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes highlightFocus {
-  0% {
+  from {
     border-color: #6c63ff;
   }
-  100% {
+  to {
     border-color: #ff6b6b;
   }
 }
 
 @keyframes fadeInSettings {
-  0% {
+  from {
     opacity: 0;
     transform: translate(-50%, -60%);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translate(-50%, -50%);
   }
