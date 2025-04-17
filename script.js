@@ -5,44 +5,17 @@ const suspiciousPatterns = [
   /exec\(/i,
   /import\s+subprocess/i,
   /subprocess\.run/i,
+  /token/i,
+  /open\(["'][^'"]*\.py["']\)/i,
+  /import\s+(os|sys)/i,
   /subprocess\.Popen/i,
   /base64\.b64decode/i,
   /requests\.get\(/i,
-  /token/i,
-  /import\s+(os|sys)/i,
-  /child_process\.exec/i,
-  /netstat/i,
-  /bash -i/i,
-  /powershell/i,
-  /document\.cookie/i,
-  /window\.location/i,
-  /xmlhttprequest/i,
-  /fs\.readFile/i,
-  /require\(['"]fs['"]\)/i,
-  /require\(['"]child_process['"]\)/i,
-  /navigator\.clipboard\.readText/i,
-  /document\.createElement\(['"]script['"]\)/i,
-  /fetch\(/i,
-  /<script.*?>/i,
-  /process\.env/i,
-  /sh -c/i,
-  /%appdata%/i,
-  /AutoHotkey/i,
-  /import\s+pickle/i,
-  /pickle\.loads/i,
-  /Marshal\.loads/i,
-  /atob\(/i,
-  /ctypes/i,
-  /system32/i,
-  /shellcode/i,
-  /wget/i,
-  /curl/i,
-  /chmod\s\+x/i
+  /open\(['"][^'"]*\.(exe|sh|bat)['"]\)/i
 ];
 
 const textarea = document.getElementById("codeInput");
 const languageSelect = document.getElementById("languageSelect");
-const resultsBox = document.getElementById("results");
 
 document.getElementById("fileUpload").addEventListener("change", function () {
   const file = this.files[0];
@@ -56,60 +29,62 @@ document.getElementById("fileUpload").addEventListener("change", function () {
   }
 });
 
-textarea.addEventListener("input", checkCode);
-languageSelect.addEventListener("change", checkCode);
+textarea.addEventListener("input", function () {
+  checkCode();
+});
+
+languageSelect.addEventListener("change", function () {
+  checkCode();
+});
 
 function checkCode() {
   const code = textarea.value;
-  const language = languageSelect.value;
-  const matchResults = [];
+  const resultsBox = document.getElementById("results");
+  let results = [];
 
-  // Check for suspicious patterns
-  suspiciousPatterns.forEach(pattern => {
+  // Apply syntax highlighting using Prism.js
+  const language = languageSelect.value;
+  textarea.innerHTML = Prism.highlight(code, Prism.languages[language], language);
+  
+  suspiciousPatterns.forEach((pattern) => {
     if (pattern.test(code)) {
-      matchResults.push(`⚠️ Suspicious match: ${pattern}`);
+      results.push(`⚠️ Suspicious code matched: ${pattern}`);
     }
   });
 
-  // Clear results box
-  resultsBox.innerHTML = '';
-
-  // Show check results
-  const resultText = document.createElement('div');
-  if (matchResults.length > 0) {
-    resultText.style.color = '#ff4d4d';
-    resultText.textContent = matchResults.join("\n");
+  if (results.length > 0) {
+    resultsBox.style.display = "block";
+    resultsBox.style.borderLeft = "4px solid #ff6b6b";
+    resultsBox.style.backgroundColor = "#ffecec";
+    resultsBox.innerText = results.join("\n");
   } else {
-    resultText.style.color = '#28a745';
-    resultText.textContent = "✅ No suspicious patterns found.";
+    resultsBox.style.display = "block";
+    resultsBox.style.borderLeft = "4px solid #6bcf63";
+    resultsBox.style.backgroundColor = "#eaffec";
+    resultsBox.innerText = "✅ No suspicious patterns found!";
   }
-  resultsBox.appendChild(resultText);
-
-  // Show syntax-highlighted code
-  const codeBlock = document.createElement('pre');
-  const codeElement = document.createElement('code');
-  codeElement.className = language;
-  codeElement.textContent = code;
-  codeBlock.appendChild(codeElement);
-  resultsBox.appendChild(codeBlock);
-  hljs.highlightElement(codeElement);
-
-  resultsBox.style.display = "block";
 }
 
 function toggleSettings() {
-  const panel = document.getElementById("settingsPanel");
-  panel.style.display = panel.style.display === "block" ? "none" : "block";
+  const settingsPanel = document.getElementById("settingsPanel");
+  settingsPanel.style.display = settingsPanel.style.display === "block" ? "none" : "block";
 }
 
 function applySettings() {
-  const dark = document.getElementById("darkModeToggle").checked;
+  const darkModeToggle = document.getElementById("darkModeToggle").checked;
   const fontSize = document.getElementById("fontSizeInput").value;
-  const spacing = document.getElementById("lineSpacingInput").value;
+  const lineSpacing = document.getElementById("lineSpacingInput").value;
 
-  document.body.classList.toggle("dark-mode", dark);
+  // Apply dark mode
+  if (darkModeToggle) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+
+  // Apply font size and line spacing
   textarea.style.fontSize = `${fontSize}px`;
-  textarea.style.lineHeight = spacing;
+  textarea.style.lineHeight = lineSpacing;
 }
 
 function resetSettings() {
