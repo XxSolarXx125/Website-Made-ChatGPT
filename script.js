@@ -1,4 +1,3 @@
-// Add thousands of suspicious pattern checks
 const suspiciousPatterns = [
   /https?:\/\/discord(app)?\.com\/api\/webhooks\//i,
   /os\.system\(["']rm/i,
@@ -38,8 +37,7 @@ const suspiciousPatterns = [
   /shellcode/i,
   /wget/i,
   /curl/i,
-  /chmod\s\+x/i,
-  // Add more here...
+  /chmod\s\+x/i
 ];
 
 const textarea = document.getElementById("codeInput");
@@ -63,59 +61,55 @@ languageSelect.addEventListener("change", checkCode);
 
 function checkCode() {
   const code = textarea.value;
-  let results = [];
+  const language = languageSelect.value;
+  const matchResults = [];
 
-  // Clear previous highlighting
-  document.querySelectorAll('pre code').forEach(el => el.textContent = '');
-
+  // Check for suspicious patterns
   suspiciousPatterns.forEach(pattern => {
     if (pattern.test(code)) {
-      results.push(`⚠️ Suspicious code matched: ${pattern}`);
+      matchResults.push(`⚠️ Suspicious match: ${pattern}`);
     }
   });
 
-  if (results.length > 0) {
-    resultsBox.style.display = "block";
-    resultsBox.style.borderLeft = "4px solid #ff6b6b";
-    resultsBox.style.backgroundColor = "#ffecec";
-    resultsBox.innerText = results.join("\n");
+  // Clear results box
+  resultsBox.innerHTML = '';
+
+  // Show check results
+  const resultText = document.createElement('div');
+  if (matchResults.length > 0) {
+    resultText.style.color = '#ff4d4d';
+    resultText.textContent = matchResults.join("\n");
   } else {
-    resultsBox.style.display = "block";
-    resultsBox.style.borderLeft = "4px solid #6bcf63";
-    resultsBox.style.backgroundColor = "#eaffec";
-    resultsBox.innerText = "✅ No suspicious patterns found!";
+    resultText.style.color = '#28a745';
+    resultText.textContent = "✅ No suspicious patterns found.";
   }
+  resultsBox.appendChild(resultText);
 
-  highlightCode();
-}
-
-function highlightCode() {
-  const code = textarea.value;
-  const language = languageSelect.value;
+  // Show syntax-highlighted code
   const codeBlock = document.createElement('pre');
   const codeElement = document.createElement('code');
-
-  codeElement.textContent = code;
   codeElement.className = language;
+  codeElement.textContent = code;
   codeBlock.appendChild(codeElement);
-
-  document.getElementById("results").appendChild(codeBlock);
+  resultsBox.appendChild(codeBlock);
   hljs.highlightElement(codeElement);
+
+  resultsBox.style.display = "block";
 }
 
 function toggleSettings() {
-  const settingsPanel = document.getElementById("settingsPanel");
-  settingsPanel.style.display = settingsPanel.style.display === "block" ? "none" : "block";
+  const panel = document.getElementById("settingsPanel");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
 }
 
 function applySettings() {
-  const darkModeToggle = document.getElementById("darkModeToggle").checked;
+  const dark = document.getElementById("darkModeToggle").checked;
   const fontSize = document.getElementById("fontSizeInput").value;
-  const lineSpacing = document.getElementById("lineSpacingInput").value;
+  const spacing = document.getElementById("lineSpacingInput").value;
 
-  document.body.classList.toggle("dark-mode", darkModeToggle);
+  document.body.classList.toggle("dark-mode", dark);
   textarea.style.fontSize = `${fontSize}px`;
-  textarea.style.lineHeight = `${lineSpacing}`;
+  textarea.style.lineHeight = spacing;
 }
 
 function resetSettings() {
