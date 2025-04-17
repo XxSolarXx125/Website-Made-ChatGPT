@@ -6,9 +6,12 @@ const suspiciousPatterns = [
   /import\s+subprocess/i,
   /subprocess\.run/i,
   /token/i,
-  /open\(["'][^'"]*\.py["']\)/i,  // Checking for file access attempts
-  /import\s+(os|sys)/i,  // Dangerous imports
-  /subprocess\.Popen/i   // Another dangerous subprocess call
+  /open\(["'][^'"]*\.py["']\)/i,
+  /import\s+(os|sys)/i,
+  /subprocess\.Popen/i,
+  /base64\.b64decode/i,  // Base64 decoding (suspicious)
+  /requests\.get\(/i,     // Suspicious network requests
+  /open\(['"][^'"]*\.(exe|sh|bat)['"]\)/i // Suspicious file operations
 ];
 
 const textarea = document.getElementById("codeInput");
@@ -42,7 +45,7 @@ function updateLineNumbers() {
   const lines = textarea.value.split("\n").length;
   let lineNumbersText = "";
   for (let i = 1; i <= lines; i++) {
-    lineNumbersText += i + "\n";
+    lineNumbersText += `${i}.\n`;
   }
   lineNumbers.textContent = lineNumbersText;
 }
@@ -69,4 +72,30 @@ function checkCode() {
     resultsBox.style.backgroundColor = "#eaffec";
     resultsBox.innerText = "✅ No suspicious patterns found!";
   }
+}
+
+function toggleSettings() {
+  const settingsPanel = document.getElementById("settingsPanel");
+  settingsPanel.style.display = settingsPanel.style.display === "block" ? "none" : "block";
+}
+
+function applySettings() {
+  const darkModeToggle = document.getElementById("darkModeToggle").checked;
+  const fontSize = document.getElementById("fontSizeInput").value;
+
+  // Apply dark mode
+  if (darkModeToggle) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+
+  // Apply font size
+  textarea.style.fontSize = `${fontSize}px`;
+}
+
+function resetSettings() {
+  document.getElementById("darkModeToggle").checked = false;
+  document.getElementById("fontSizeInput").value = 15;
+  applySettings();
 }
